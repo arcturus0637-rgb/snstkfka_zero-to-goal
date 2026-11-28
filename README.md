@@ -6,6 +6,7 @@ A Claude Code skill that runs a large software project from a stated end goal to
 
 - **It switches on when you state a final goal.** Small tasks (fixes, installs, questions) stay outside the harness.
 - **A central agent designs; parallel branches build.** Work is split into 2-4 branches that never touch the same files. Each branch gets its own git worktree, and its own session where your environment supports that.
+- **Each sub-session gets the reasoning it needs, no more.** Mechanical work runs on the cheapest model at low effort, fixed-contract implementation on a middle one, and design, merging and the critic on the central's model at high effort. The choice is written into the branch brief.
 - **The contract comes first.** Module 0 is a shared contract: the message format, types, interfaces, schema, and fixtures built from real data. Branches build against the contract and use fakes for each other, so they can run in parallel without blocking.
 - **A critic checks four checkpoints:** goal confirmation, approach confirmation, any method change, and before declaring done. It argues only with evidence, and stays silent if it has nothing. Both sides are shown to you in full, and you decide.
 - **Every step ends in evidence:**

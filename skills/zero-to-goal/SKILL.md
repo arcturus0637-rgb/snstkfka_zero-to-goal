@@ -28,6 +28,25 @@ Do not guess the scale and switch it on yourself. The user stating a goal is the
 - **Implementation branches.** Each independent unit gets its own **git worktree and branch**, and its own session if your environment can start sessions.
   - Otherwise, run each branch as a subagent with worktree isolation, and say that is what you did.
 
+## Model and effort for sub-sessions
+
+Pick the model and the `effort` level for every sub-session or subagent from how much reasoning the task needs. Do not run every branch at the central's settings; that spends the most expensive reasoning on work that does not need it.
+
+Some hosts let an agent set `effort` only when an instruction file explicitly asks for it. This section is that instruction.
+
+| Task | Model | Effort |
+|---|---|---|
+| Mechanical or read-only: search, listing files, taking screenshots, simple replacements, formatting | cheapest model | low |
+| Implementing a module whose contract is already fixed: inputs, outputs and file boundaries are decided | middle model | medium |
+| Design judgment, debugging with an unknown cause, a contract that needs interpreting | same model as central | high |
+| The critic, merging branches and resolving conflicts, the final "done" check | same model as central | high or above |
+
+- **Never run evidence judgment cheaply.** Reading a wrong measurement as a pass is the mistake the evidence rules below exist to stop, and it happens at exactly this step.
+- **Write the choice into the branch brief:** the model, the effort, and one line of reason. The user can then see it and change it.
+- **The central is the ceiling.** Some hosts cap a sub-session at the central's own model and effort and silently ignore a higher request (Claude Desktop's session tool does). If a task needs more reasoning than the central has, do not try to raise the child. Tell the user, and ask them to switch the session's model.
+- **When a branch reports a blocker,** decide whether to send it back one tier up. Do not retry at the same setting with nothing changed; that retry adds no information.
+- **Name tiers, not model ids.** Ids change; "cheapest, middle, same as central" does not.
+
 ## Flow
 
 1. **Overall goal.** The user states it.
@@ -47,6 +66,7 @@ Do not guess the scale and switch it on yourself. The user stating a goal is the
    - Give each branch a brief that lists:
      - its allowed folders
      - its done criteria
+     - its model and effort, with one line of reason (see "Model and effort for sub-sessions")
      - "never push"
      - "ask central for contract changes"
 5. **Blockers.** A branch reports a blocker to you, and you propose a fix.

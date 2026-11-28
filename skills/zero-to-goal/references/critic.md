@@ -8,6 +8,8 @@ Start the critic with the Agent tool at one of the four checkpoints:
 
 Give it the material, not your conclusions. That means the goal text, the proposed approach, the module goals, or the diff and the verification output.
 
+Run it at the central's model and a high effort. It judges evidence, and that is the step that should not be run cheaply (see "Model and effort for sub-sessions" in `SKILL.md`).
+
 ## Prompt template
 
 ```
